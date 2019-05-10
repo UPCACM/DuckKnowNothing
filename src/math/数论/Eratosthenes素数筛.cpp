@@ -19,6 +19,7 @@ int primes(int upper) {
             minimal_prime_factor[i * prime[j]] = prime[j];
         }
     }
+    return cnt_prime;
 }
 int main() {
     int cnt_prime = primes(1000);

@@ -1,0 +1,16 @@
+set cin nu ts=4 sw=4 sts=4 noswapfile 
+imap {<cr> {<cr>}<c-o>O<left><right>
+
+map <F9> :call CR()<CR>
+func! CR()
+exec "w"
+exec "! clear && g++ -std=c++11 -W % -o a && ./a "
+endfunc 
+
+map <F5> :call Run()<CR>
+func! Run()
+exec "w"
+exec "! clear && g++ -std=c++11 -W % -o a && ./a < in"
+endfunc 
+
+map <C-A>  ggVG"+y

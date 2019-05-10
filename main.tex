@@ -1,0 +1,382 @@
+%!TEX program = xelatex
+\documentclass{ctexart}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{aligned-overset}
+\usepackage{bookmark}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{appendix}
+\usepackage{bm}
+\usepackage{chapterbib}
+\geometry{a4paper,scale=0.8}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{ACM模板 by 嘤嘤嘤} %页眉与页脚
+\fancyfoot[C]{} 
+\rfoot{\thepage} % 显示页码
+\hypersetup{hidelinks} % 隐藏目录红色边框
+\ctexset{section/format = {\Large\bfseries}} % section标题靠左
+
+
+\definecolor{commentgreen}{RGB}{2,112,10}
+\definecolor{eminence}{RGB}{108,48,130}
+\definecolor{weborange}{RGB}{255,165,0}
+\definecolor{frenchplum}{RGB}{129,20,83}
+
+
+
+\newfontfamily\codeFont{SourceCodePro-Medium}
+\newfontfamily\codeBold{SourceCodePro-Bold}
+\newfontfamily\commentFont{Courier Regular}
+\lstset{
+	language    = c++,
+	numbers     = left,
+	numberstyle = \small,
+	breaklines  = true,
+	captionpos  = b,
+	tabsize     = 4,
+%	frame       = shadowbox,
+	frame       = leftline,
+	columns     = fullflexible,
+	commentstyle = \commentFont\color[RGB]{0,0,0},
+	keywordstyle = \codeBold\color[RGB]{0,0,0},
+	basicstyle   = \large\codeFont,
+	stringstyle  = \color[RGB]{48,0,20}\codeFont,
+	rulesepcolor = \color{red!20!green!20!blue!20},
+	showstringspaces = false,
+}
+
+
+
+
+\setmainfont{Courier Regular} % 英文字体
+% \setmainfont{Noto Mono Bold} % 英文字体
+
+
+\begin{document}  
+
+\begin{titlepage} % 封面放在titlepage中不计页码
+% \author{嘤嘤嘤}
+\title{ACM模板}
+\maketitle
+\setcounter{page}{0}
+\thispagestyle{empty}
+\end{titlepage}
+
+
+\tableofcontents % 显示目录
+\newpage
+
+
+\section{字符串处理}
+\subsection{SAM}
+\lstinputlisting{./src/StringAlgorithm/SAM.cpp}
+\subsection{AC自动机}
+(by qi)
+\lstinputlisting[language=C++]{./src/StringAlgorithm/ACautomation.cpp}
+(by shui)
+\lstinputlisting[language=C++]{./src/StringAlgorithm/shui/O(n)-AC自动机.cpp}
+\subsection{z-algorithm}
+\lstinputlisting[language=C++]{./src/StringAlgorithm/z-algorithm.cpp}
+\subsection{后缀数组}
+(by shui)
+\lstinputlisting[language=C++]{./src/StringAlgorithm/shui/O(nlogn)-后缀数组.cpp}
+(by qi)
+\lstinputlisting[language=C++]{./src/StringAlgorithm/SuffixArray.cpp}
+\subsection{最长上升子序列}
+\lstinputlisting{./src/StringAlgorithm/shui/O(nlogn)-最长上升子序列.cpp}
+\subsection{Manacher}
+\lstinputlisting{./src/StringAlgorithm/shui/O(n)-Manacher.cpp}
+\subsection{KMP}
+\lstinputlisting{./src/StringAlgorithm/shui/O(n+m)-KMP.cpp}
+\subsection{ex-KMP}
+\lstinputlisting{./src/StringAlgorithm/shui/O(n+m)-扩展KMP.cpp}
+\subsection{Sunday}
+\lstinputlisting{./src/StringAlgorithm/shui/O(n)-Sunday.cpp}
+\subsection{字符串哈希}
+\lstinputlisting{./src/StringAlgorithm/shui/O(n)-字符串Hash.cpp}
+\subsection{字符串最大最小表示}
+\lstinputlisting{./src/StringAlgorithm/shui/O(n)-最大最小表示.cpp}
+
+
+
+\section{排序算法}
+\subsection{归并排序}
+\lstinputlisting{./src/排序算法/归并排序.cpp}
+
+
+
+\section{数学}
+\subsection{扩展欧几里得算法}
+\lstinputlisting{./src/math/exgcd.cpp}
+\subsection{求逆元}
+\lstinputlisting{./src/math/inv_element.cpp}
+\subsection{Miller robin素数检验}
+\lstinputlisting{./src/math/Miller_Rabin.cpp}
+\subsection{快速傅里叶变换}
+\lstinputlisting{./src/math/FFT.cpp}
+\subsection{快速数论变换}
+\lstinputlisting{./src/math/NTT.cpp}
+\subsection{求原根}
+\lstinputlisting{./src/math/Primitive_root.cpp}
+\subsection{BM黑盒线代}
+\lstinputlisting{./src/math/LinearRecurrence.cpp}
+\subsection{FWT}
+\lstinputlisting{./src/math/FWT.cpp}
+\subsection{Simpson积分}
+\lstinputlisting{./src/math/simpson_integral.cpp}
+\subsection{扩展欧拉定理}
+\begin{equation}
+a^b\equiv \left\{
+\begin{aligned}
+& a^{b\%\phi(p)}&  gcd(a,p)=1\\
+& a^b           &  gcd(a,p)\neq1,b<\phi(p)\\
+& a^{b\%\phi(p)+\phi(p)} & gcd(a,p)\neq1,b\geq\phi(p)
+\end{aligned}
+\right.
+\end{equation}
+
+\subsection{杜教筛}
+\begin{align*}
+	(f*g)(n)&=\sum_{d|n}f(d)g(n/d) \\
+	\sum_{i=1}^n(f*g)(i) &= \sum_{i=1}^n\sum_{d|i}f(d)g(i/d) \\
+	&= \sum_{d=1}^ng(d)\sum_{i=1}^{\lfloor n/d\rfloor}f(i) \\
+	&= \sum_{d=1}^ng(d)s(\lfloor n/d \rfloor) \\
+	&= \sum_{d=2}^ng(d)s(\lfloor n/d \rfloor)+g(1)s(n) \\
+	g(1)s(n) &=\sum_{i=1}^n(f*g)(i)-\sum_{d=2}^ng(d)s(n/d)
+\end{align*}
+\lstinputlisting{./src/math/djs.cpp}
+\subsection{Pell方程}
+\lstinputlisting{./src/math/Pell.cpp}
+\subsection{莫比乌斯反演}
+$$ f(n)=\sum_{d|n}g(d) \Longleftrightarrow g(n)=\sum_{d|n}\mu(d)f(\frac{n}{d}) $$
+\subsection{常用素数}
+\lstinputlisting{./src/math/primes.txt}
+\subsection{快速取模乘}
+\lstinputlisting{./src/math/quickMod.cpp}
+\subsection{多项式算法(逆元,exp,ln)}
+\lstinputlisting{./src/math/PolynomialAlgorithms.cpp}
+
+\subsection{gcd}
+\lstinputlisting{./src/math/数论/GCD.cpp}
+\subsection{Eratosthenes素数筛}
+\lstinputlisting{./src/math/数论/Eratosthenes素数筛.cpp}
+\subsection{扩展BSGS}
+\lstinputlisting{./src/math/数论/扩展BSGS.cpp}
+\subsection{欧拉函数}
+\lstinputlisting{./src/math/数论/欧拉函数.cpp}
+\subsection{矩阵快速幂}
+\lstinputlisting{./src/math/数论/矩阵快速幂.cpp}
+\subsection{组合数}
+\lstinputlisting{./src/math/数论/组合数.cpp}
+\subsection{长整型无脑取模乘}
+\lstinputlisting{./src/math/数论/长整型无脑取模乘.cpp}
+% section  (end)
+
+%%%------------------------------------------------------------
+
+
+
+
+\section{数据结构}
+\subsection{KD-Tree}
+\lstinputlisting{./src/DataStructures/KDTree.cpp}
+\subsection{李超树}
+\lstinputlisting{./src/DataStructures/LichaoTree.cpp}
+\subsection{左偏树\&优先队列} % (fold)
+\lstinputlisting{./src/DataStructures/树/左偏树_优先队列.cpp}
+\subsection{树链剖分}
+(by shui)
+\lstinputlisting{./src/DataStructures/树/树链剖分.cpp}
+(by qi)
+\lstinputlisting{./src/DataStructures/HeavyLightdeComposition.cpp}
+\subsection{Treap}
+\lstinputlisting{./src/DataStructures/树/二叉树/Treap.txt}
+\lstinputlisting{./src/DataStructures/树/二叉树/Treap指针.cpp}
+\lstinputlisting{./src/DataStructures/树/二叉树/Treap数组.cpp}
+\subsection{线段树}
+\lstinputlisting{./src/DataStructures/树/二叉树/zkw线段树.cpp}
+\subsection{主席树}
+(by shui)
+\lstinputlisting{./src/DataStructures/树/二叉树/主席树.cpp}
+(by qi)
+\lstinputlisting{./src/DataStructures/PersistentSegmentTree.cpp}
+\subsection{二叉查找树}
+\lstinputlisting{./src/DataStructures/树/二叉树/二叉查找树_temp.cpp}
+\subsection{Splay}
+\lstinputlisting{./src/DataStructures/树/二叉树/伸展树(splay_tree).cpp}
+\lstinputlisting{./src/DataStructures/树/二叉树/伸展树splay数组.cpp}
+\subsection{线段树}
+\lstinputlisting{./src/DataStructures/树/二叉树/线段树.cpp}
+\subsection{二叉堆\&优先队列}
+\lstinputlisting{./src/DataStructures/树/堆/二叉堆_优先队列.cpp}
+\subsection{树状数组} % (fold)
+\lstinputlisting{./src/DataStructures/树状数组/O(logn)-树状数组.cpp}
+\subsection{二维树状数组} % (fold)
+\lstinputlisting{./src/DataStructures/树状数组/二维树状数组.cpp}
+\subsection{可持久化Trie树} % (fold)
+\lstinputlisting{./src/DataStructures/PersistentTrieTree.cpp}
+\subsection{并查集} % (fold)
+\lstinputlisting{./src/DataStructures/集合/并查集.cpp}
+\subsection{栈\&队列}
+\subsubsection{单调栈}
+\lstinputlisting{./src/DataStructures/单调栈.cpp}
+\subsubsection{队列}
+\lstinputlisting{./src/DataStructures/queue.cpp}
+\subsubsection{单调队列}
+\lstinputlisting{./src/DataStructures/单调队列.cpp}
+
+
+\section{动态规划}
+\subsection{数位dp}
+\lstinputlisting{./src/DynamicPrograming/数位DP.cpp}
+\subsection{状态压缩}
+\lstinputlisting{./src/DynamicPrograming/状态压缩.cpp}
+\subsection{背包问题}
+\subsubsection{01背包}
+\lstinputlisting{./src/DynamicPrograming/背包问题/01背包.cpp}
+\subsubsection{多重背包}
+\lstinputlisting{./src/DynamicPrograming/背包问题/多重背包.cpp}
+\subsubsection{完全背包}
+\lstinputlisting{./src/DynamicPrograming/背包问题/完全背包.cpp}
+
+
+
+
+
+
+
+\section{图论}
+\subsection{二分图}
+\subsubsection{KM}
+\lstinputlisting{./src/GraphAlgorithm/二分图/O(n^3)-KM.cpp}
+\subsubsection{匈牙利}
+\lstinputlisting{./src/GraphAlgorithm/二分图/O(VE)-最大匹配.cpp}
+\subsection{拓扑排序}
+\subsubsection{DFS拓扑排序}
+\lstinputlisting{./src/GraphAlgorithm/拓扑排序/O(V+E)-DFS拓扑排序.cpp}
+\subsubsection{Kahn拓扑排序}
+\lstinputlisting{./src/GraphAlgorithm/拓扑排序/O(V+E)-Kahn拓扑排序.cpp}
+\subsection{最短路}
+\subsubsection{堆优化Dijkstra}
+\lstinputlisting{./src/GraphAlgorithm/最短路/Dijkstra+Priority_queue.cpp}
+\subsubsection{SPFA}
+\lstinputlisting{./src/GraphAlgorithm/最短路/O(VE)-SPFA.cpp}
+\subsubsection{次短路Dijkstra}
+\lstinputlisting{./src/GraphAlgorithm/最短路/次短路-Dijkstra.cpp}
+\subsubsection{AStar}
+\lstinputlisting{./src/GraphAlgorithm/最短路/AStar.cpp}
+\subsection{网络流}
+\subsubsection{Dinic}
+\lstinputlisting{./src/GraphAlgorithm/网络流/O(V^2E)-Dinic.cpp}
+\subsubsection{MCMF}
+\lstinputlisting{./src/GraphAlgorithm/网络流/MCMF.cpp}
+\subsection{连通图}
+\subsubsection{割边}
+\lstinputlisting{./src/GraphAlgorithm/连通图/割边_Temp.cpp}
+\subsubsection{连通图Tarjan}
+\lstinputlisting{./src/GraphAlgorithm/连通图/连通图_Tarjan.cpp}
+
+
+
+\section{树}
+\subsection{LCA}
+\subsubsection{RMQ-ST}
+\lstinputlisting{./src/树/LCA-RMQ_ST.cpp}
+\subsubsection{Tarjan并查集}
+\lstinputlisting{./src/树/LCA_Tarjan_并查集.cpp}
+\subsubsection{倍增算法}
+\lstinputlisting{./src/树/O(nlogn)-LCA倍增.cpp}
+\subsection{最小生成树}
+\subsubsection{O(elog2v)-primMST}
+\lstinputlisting{./src/树/O(elog2v)-primMST.cpp}
+\subsubsection{O(elogv)-prim+heap MST}
+\lstinputlisting{./src/树/O(elogv)prim+heapMST.cpp}
+
+
+
+
+
+\section{计算几何}
+\subsection{基础定义}
+\lstinputlisting{./src/计算几何/基础定义.cpp}
+\subsection{点}
+\lstinputlisting{./src/计算几何/点.cpp}
+\subsection{线}
+\lstinputlisting{./src/计算几何/线.cpp}
+\subsection{凸包}
+\lstinputlisting{./src/计算几何/凸包.cpp}
+\subsection{三角形}
+\lstinputlisting{./src/计算几何/三角形.cpp}
+\subsection{圆}
+\lstinputlisting{./src/计算几何/圆.cpp}
+
+
+%% start of shui's templates
+\subsection{O(n)-求凸包 \& 旋转卡壳}
+\lstinputlisting{./src/计算几何/byshui/O(n)-求凸包_旋转卡壳.cpp}
+\subsection{两圆相交面积}
+\lstinputlisting{./src/计算几何/byshui/两圆相交面积.cpp}
+\subsection{两直线交点}
+\lstinputlisting{./src/计算几何/byshui/两直线交点.cpp}
+\subsection{点在直线上的垂点}
+\lstinputlisting{./src/计算几何/byshui/点在直线上的垂点.cpp}
+\subsection{矩形面积交}
+\lstinputlisting{./src/计算几何/byshui/矩形面积交.cpp}
+\subsection{线段类}
+\lstinputlisting{./src/计算几何/byshui/线段类.cpp}
+\subsection{计算三角形外心}
+\lstinputlisting{./src/计算几何/byshui/计算三角形外心.cpp}
+%% end of shui's
+
+
+\section{STL}
+\subsection{accumulate}
+\lstinputlisting{./src/STL/accumulate.cpp}
+
+
+
+\section{其他}
+\subsection{约瑟夫问题}
+\lstinputlisting{./src/其他/josephus-problem.cpp}
+\subsection{RMQ-ST}
+\lstinputlisting{./src/其他/RMQ-ST.cpp}
+\subsection{一些理论}
+\lstinputlisting{./src/其他/一些理论.cpp}
+\subsection{随机数和文件输出}
+\lstinputlisting{./src/其他/随机数和文件输出.cpp}
+\subsection{随机遍历数组}
+\lstinputlisting{./src/其他/随机遍历数组.cpp}
+\subsection{尺取}
+\lstinputlisting{./src/其他/尺取.cpp}
+
+\subsection{std::unordered\_map避免TLE}
+\begin{lstlisting}
+unordered_map<int,int>mp;
+mp.reserve(1024);
+mp.max_load_factor(0.25);
+\end{lstlisting}
+\subsection{输入输出挂}
+(by shui)
+\lstinputlisting{./src/其他/输入输出优化.cpp}
+(by qi)
+\lstinputlisting{./src/其他/FastIO.cpp}
+\subsection{CDQ分治}
+\lstinputlisting{./src/其他/CDQ.cpp}
+\subsection{vim配置}
+\lstinputlisting{./src/其他/_vimrc}
+\subsection{程序对拍器}
+\lstinputlisting[language=bash]{./src/其他/checker.sh}
+\subsection{简易对排器}
+\lstinputlisting[language=bash]{./src/其他/Simple_checker.sh}
+
+
+
+中文 english
+
+
+
+
+
+\end{document}

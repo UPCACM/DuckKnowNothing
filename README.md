@@ -1,3 +1,3 @@
-# DuckKnowNothing ACMTemplate
+# Duck Know Nothing ACMTemplate
 
-鸭子什么都不会
+「都不会鸭」ACM 模板

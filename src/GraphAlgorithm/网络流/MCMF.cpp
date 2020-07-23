@@ -15,7 +15,7 @@ struct Graph {
 struct MCMF {
     int dist[maxn], pre[maxn], low[maxn], vis[maxn], que[maxn * maxn], clk;
     bool bfs(int S, int T) {
-        vis[S] = ++clk, low[S] = inf, dist[S] = 0, memset(dist, 0x3f, sizeof(dist));
+        vis[S] = ++clk, low[S] = inf, memset(dist, 0x3f, sizeof(dist)), dist[S] = 0;
         int head = 0, tail = 0;
         que[tail++] = S;
         while (head < tail) {
